@@ -50,14 +50,18 @@ public class Agent : MonoBehaviour
         {
             return r;
         }
-
+        int countAgents = 0;
         //Find the center of mass of all neighbors
         foreach (var agent in neighbours)
         {
-            r += agent.x;
+            if (isInFieldOfVeiw(agent.x))
+            {
+                r += agent.x;
+                ++countAgents;
+            }
         }
 
-        r /= neighbours.Count;
+        r /= countAgents;
 
         // a vector for our position x toward the com r
         r = r - this.x;
@@ -81,17 +85,20 @@ public class Agent : MonoBehaviour
         //add the contribution neighbot towards me
         foreach (var agent in neighbours)
         {
-            Vector3 towardsMe = this.x - agent.x;
-            
-            //if magnitude equals 0 both agents are in the same point
-            if (towardsMe.magnitude > 0)
+            if (isInFieldOfVeiw(agent.x))
             {
-                //force contribution is inversly proportional to 
-                r += (towardsMe.normalized / towardsMe.magnitude);
+                Vector3 towardsMe = this.x - agent.x;
 
+                //if magnitude equals 0 both agents are in the same point
+                if (towardsMe.magnitude > 0)
+                {
+                    //force contribution is inversly proportional to 
+                    r += (towardsMe.normalized / towardsMe.magnitude);
+
+                }
+
+                return r.normalized;
             }
-           
-            return r.normalized;
         }
 
         return Vector3.zero;
@@ -110,8 +117,11 @@ public class Agent : MonoBehaviour
 
         foreach (var agent in neighbours)
         {
-            //Match direction and speed == match velocity
-            r += agent.v;
+            if (isInFieldOfVeiw(agent.x))
+            {
+                //Match direction and speed == match velocity
+                r += agent.v;
+            }
         }
 
         return r.normalized;
@@ -141,5 +151,10 @@ public class Agent : MonoBehaviour
             value = max;
         }
         return value;
+    }
+
+    bool isInFieldOfVeiw(Vector3 stuff)
+    {
+        return Vector3.Angle(this.v, stuff - this.x) <= conf.MaxFieldOfViewAngle;
     }
 }

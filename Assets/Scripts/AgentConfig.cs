@@ -15,4 +15,6 @@ public class AgentConfig : MonoBehaviour
 
     public float maxA;
     public float maxV;
+
+    public float MaxFieldOfViewAngle = 360;
 }
