@@ -8,14 +8,27 @@ public class Agent : MonoBehaviour
     public Vector3 v;
     public Vector3 a;
     public World world;
-
+    public AgentConfig conf;
     void Start ()
     {
         world = FindObjectOfType<World>();
+        conf = FindObjectOfType<AgentConfig>();
+
+        x = transform.position;
     }
 	
-	void Update () {
-		
+	void Update ()
+	{
+	    float t = Time.deltaTime;
+
+	    a = combine();
+	    a = Vector3.ClampMagnitude(a, conf.maxA);
+
+	    v = v + a * t;
+	    v = Vector3.ClampMagnitude(v, conf.maxV);
+
+        x = x + v * t;
+	    transform.position = x;
 	}
 
     Vector3 cohesion()

@@ -12,4 +12,7 @@ public class AgentConfig : MonoBehaviour
     public float Kc;
     public float Ks;
     public float Ka;
+
+    public float maxA;
+    public float maxV;
 }
