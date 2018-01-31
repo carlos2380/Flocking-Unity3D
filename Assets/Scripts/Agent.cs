@@ -9,6 +9,11 @@ public class Agent : MonoBehaviour
     public Vector3 a;
     public World world;
     public AgentConfig conf;
+    
+
+    private Vector3 wanderTarget;
+    private GameObject debugWanderCube;
+
     void Start ()
     {
         world = FindObjectOfType<World>();
@@ -16,6 +21,8 @@ public class Agent : MonoBehaviour
 
         x = transform.position;
         v = new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 3));
+
+        if(world.debugWonder) debugWanderCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
     }
 	
 	void Update ()
@@ -32,12 +39,16 @@ public class Agent : MonoBehaviour
 
         wrapArround(ref x, -world.bound, world.bound);
 
-	    transform.position = x;
-	    if (v.magnitude > 0)
+	    if (world.debugWonder == false)
 	    {
-	        transform.LookAt(x + v);
-        }
-        
+	        transform.position = x;
+
+	        if (v.magnitude > 0)
+	        {
+	            transform.LookAt(x + v);
+	        }
+	    }
+
 	}
 
     Vector3 cohesion()
@@ -129,7 +140,7 @@ public class Agent : MonoBehaviour
 
     Vector3 combine()
     {
-        Vector3 r = conf.Kc*cohesion() + conf.Ks*separation() + conf.Ka*alignment();
+        Vector3 r = conf.Kc*cohesion() + conf.Ks*separation() + conf.Ka*alignment() + conf.Kw*wander();
         return r;
     }
 
@@ -155,6 +166,39 @@ public class Agent : MonoBehaviour
 
     bool isInFieldOfVeiw(Vector3 stuff)
     {
-        return Vector3.Angle(this.v, stuff - this.x) <= conf.MaxFieldOfViewAngle;
+        return (Vector3.Angle(this.v, stuff - this.x) <= conf.MaxFieldOfViewAngle || -Vector3.Angle(this.v, stuff - this.x) >= -conf.MaxFieldOfViewAngle);
+    }
+
+    
+    Vector3 wander()
+    {
+        float jitter = conf.WanderJitter * Time.deltaTime;
+
+        //add a small random vector to the target's position
+        wanderTarget += new Vector3(RandomBinomial()*jitter, 0, RandomBinomial() * jitter);
+
+        //project the vector bacj to unit circle
+        wanderTarget = wanderTarget.normalized;
+
+        //inclrease length to be the same of the radius of wander circle
+        wanderTarget *= conf.WanderRadius;
+
+        //position the target in front of the agent
+        Vector3 targetInLocalSpace = wanderTarget + new Vector3(0, 0, conf.WanderDistance);
+
+        //tranform the target from local space to world space
+        Vector3 targetInWorldSpace = transform.TransformPoint(targetInLocalSpace);
+
+        if (world.debugWonder) debugWanderCube.transform.position = targetInWorldSpace;
+
+        targetInWorldSpace -= this.x;
+
+        return targetInWorldSpace.normalized;
+
+    }
+
+    float RandomBinomial()
+    {
+        return Random.Range(0f, 1f) - Random.Range(0f, 1f);
     }
 }

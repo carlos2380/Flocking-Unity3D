@@ -12,9 +12,14 @@ public class AgentConfig : MonoBehaviour
     public float Kc;
     public float Ks;
     public float Ka;
+    public float Kw;
 
     public float maxA;
     public float maxV;
 
-    public float MaxFieldOfViewAngle = 360;
+    public float MaxFieldOfViewAngle = 180;
+
+    public float WanderJitter;
+    public float WanderRadius;
+    public float WanderDistance;
 }

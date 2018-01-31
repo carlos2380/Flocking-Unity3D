@@ -10,6 +10,7 @@ public class World : MonoBehaviour
     public List<Agent> agents;
     public float bound;
     public float spawnR;
+    public bool debugWonder = false;
 
     void Start ()
 	{
