@@ -33,6 +33,20 @@ public class World : MonoBehaviour
 
     public List<Agent> getNeightbours(Agent agent, float radious)
     {
-        return null;
+
+        List<Agent> neightbours = new List<Agent>();
+        foreach (var otherAgent in agents)
+        {
+            if (otherAgent != agent)
+            {
+                if (Vector3.Distance(agent.x, otherAgent.x) <= radious)
+                {
+                    neightbours.Add(otherAgent);
+                }
+            }
+
+        }
+
+        return neightbours;
     }
 }
