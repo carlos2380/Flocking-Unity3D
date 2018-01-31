@@ -187,8 +187,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 19967420}
-  m_LocalRotation: {x: -0.48486778, y: 0.39409328, z: -0.25952512, w: -0.7363698}
-  m_LocalPosition: {x: 28.08354, y: 58.176765, z: -9.462621}
+  m_LocalRotation: {x: -0.54994625, y: 0.00450772, z: -0.002996031, w: -0.83518255}
+  m_LocalPosition: {x: 4.9915686, y: 167.67213, z: -116.07715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -289,8 +289,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 4303958842058044, guid: da3c06b1687bb0f4eae7e4774283b3cd,
     type: 2}
-  nAgents: 15
+  nAgents: 100
   agents: []
+  bound: 100
+  spawnR: 50
 --- !u!4 &1185701126
 Transform:
   m_ObjectHideFlags: 0
@@ -315,11 +317,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cb667f4f3f79d4abfc1f0181a65ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rc: 30
-  Rs: 3
-  Ra: 0
-  Kc: 0
-  Ks: 0
-  Ka: 0
-  maxA: 10
-  maxV: 10
+  Rc: 20
+  Rs: 5
+  Ra: 10
+  Kc: 60
+  Ks: 80
+  Ka: 100
+  maxA: 20
+  maxV: 20

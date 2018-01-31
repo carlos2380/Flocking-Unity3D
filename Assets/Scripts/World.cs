@@ -8,6 +8,8 @@ public class World : MonoBehaviour
     public Transform agentPrefab;
     public int nAgents ;
     public List<Agent> agents;
+    public float bound;
+    public float spawnR;
 
     void Start ()
 	{
@@ -25,7 +27,7 @@ public class World : MonoBehaviour
     {
         for (int i = 0; i < n; ++i)
         {
-            var obj = Instantiate(prefab, new Vector3(Random.Range(-20, 20), 0, Random.Range(-20, 20)),
+            var obj = Instantiate(prefab, new Vector3(Random.Range(-spawnR, spawnR), 0, Random.Range(-spawnR, spawnR)),
                 Quaternion.identity);
 
         }

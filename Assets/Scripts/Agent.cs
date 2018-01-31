@@ -22,13 +22,16 @@ public class Agent : MonoBehaviour
 	{
 	    float t = Time.deltaTime;
 
-	    a = alignment();
+	    a = combine();
 	    a = Vector3.ClampMagnitude(a, conf.maxA);
 
 	    v = v + a * t;
 	    v = Vector3.ClampMagnitude(v, conf.maxV);
 
         x = x + v * t;
+
+        wrapArround(ref x, -world.bound, world.bound);
+
 	    transform.position = x;
 	    if (v.magnitude > 0)
 	    {
@@ -59,7 +62,7 @@ public class Agent : MonoBehaviour
         // a vector for our position x toward the com r
         r = r - this.x;
 
-        Vector3.Normalize(r);
+        r = Vector3.Normalize(r);
         return r;
     }
 
@@ -116,6 +119,27 @@ public class Agent : MonoBehaviour
 
     Vector3 combine()
     {
-        return Vector3.zero;
+        Vector3 r = conf.Kc*cohesion() + conf.Ks*separation() + conf.Ka*alignment();
+        return r;
+    }
+
+    void wrapArround(ref Vector3 v, float min, float max)
+    {
+        v.x = wrapArroundFloat(v.x, min, max);
+        v.y = wrapArroundFloat(v.y, min, max);
+        v.z = wrapArroundFloat(v.z, min, max);
+    }
+
+    float wrapArroundFloat(float value, float min, float max)
+    {
+        if (value > max)
+        {
+            value = min;
+        }
+        else if (value < min)
+        {
+            value = max;
+        }
+        return value;
     }
 }
