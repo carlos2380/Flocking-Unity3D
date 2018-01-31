@@ -15,13 +15,14 @@ public class Agent : MonoBehaviour
         conf = FindObjectOfType<AgentConfig>();
 
         x = transform.position;
+        v = new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 3));
     }
 	
 	void Update ()
 	{
 	    float t = Time.deltaTime;
 
-	    a = separation();
+	    a = alignment();
 	    a = Vector3.ClampMagnitude(a, conf.maxA);
 
 	    v = v + a * t;
@@ -95,7 +96,22 @@ public class Agent : MonoBehaviour
 
     Vector3 alignment()
     {
-        return Vector3.zero;
+        Vector3 r = new Vector3();
+
+        var neighbours = world.getNeightbours(this, conf.Ra);
+
+        if (neighbours.Count == 0)
+        {
+            return r;
+        }
+
+        foreach (var agent in neighbours)
+        {
+            //Match direction and speed == match velocity
+            r += agent.v;
+        }
+
+        return r.normalized;
     }
 
     Vector3 combine()
