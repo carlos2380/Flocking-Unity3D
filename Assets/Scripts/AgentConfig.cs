@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentConfig : MonoBehaviour {
+public class AgentConfig : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public float Rc;
+    public float Rs;
+    public float Ra;
+
+    public float Kc;
+    public float Ks;
+    public float Ka;
 }
