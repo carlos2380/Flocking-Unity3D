@@ -21,7 +21,7 @@ public class Agent : MonoBehaviour
 	{
 	    float t = Time.deltaTime;
 
-	    a = cohesion();
+	    a = separation();
 	    a = Vector3.ClampMagnitude(a, conf.maxA);
 
 	    v = v + a * t;
@@ -59,6 +59,32 @@ public class Agent : MonoBehaviour
 
     Vector3 separation()
     {
+
+        Vector3 r = new Vector3();
+
+        var neighbours = world.getNeightbours(this, conf.Rs);
+
+        if (neighbours.Count == 0)
+        {
+            return r;
+        }
+
+        //add the contribution neighbot towards me
+        foreach (var agent in neighbours)
+        {
+            Vector3 towardsMe = this.x - agent.x;
+            
+            //if magnitude equals 0 both agents are in the same point
+            if (towardsMe.magnitude > 0)
+            {
+                //force contribution is inversly proportional to 
+                r += (towardsMe.normalized / towardsMe.magnitude);
+
+            }
+           
+            return r.normalized;
+        }
+
         return Vector3.zero;
     }
 
