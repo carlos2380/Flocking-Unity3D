@@ -29,6 +29,11 @@ public class Agent : MonoBehaviour
 
         x = x + v * t;
 	    transform.position = x;
+	    if (v.magnitude > 0)
+	    {
+	        transform.LookAt(x + v);
+        }
+        
 	}
 
     Vector3 cohesion()

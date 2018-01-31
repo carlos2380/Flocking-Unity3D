@@ -162,7 +162,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -187,8 +187,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 19967420}
-  m_LocalRotation: {x: 0.18363985, y: -0.17733459, z: 0.03370605, w: 0.9662778}
-  m_LocalPosition: {x: 56.021057, y: 64.504776, z: -152.27757}
+  m_LocalRotation: {x: -0.48486778, y: 0.39409328, z: -0.25952512, w: -0.7363698}
+  m_LocalPosition: {x: 28.08354, y: 58.176765, z: -9.462621}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 4303958842058044, guid: da3c06b1687bb0f4eae7e4774283b3cd,
     type: 2}
-  nAgents: 649
+  nAgents: 15
   agents: []
 --- !u!4 &1185701126
 Transform:
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rc: 30
-  Rs: 30
+  Rs: 3
   Ra: 0
   Kc: 0
   Ks: 0
