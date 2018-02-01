@@ -138,9 +138,9 @@ public class Agent : MonoBehaviour
         return r.normalized;
     }
 
-    Vector3 combine()
+    protected virtual Vector3 combine()
     {
-        Vector3 r = conf.Kc*cohesion() + conf.Ks*separation() + conf.Ka*alignment() + conf.Kw*wander();
+        Vector3 r = conf.Kc*cohesion() + conf.Ks*separation() + conf.Ka*alignment() + conf.Kw*wander() + conf.Kavoid*avoidEnemies();
         return r;
     }
 
@@ -169,8 +169,8 @@ public class Agent : MonoBehaviour
         return (Vector3.Angle(this.v, stuff - this.x) <= conf.MaxFieldOfViewAngle || -Vector3.Angle(this.v, stuff - this.x) >= -conf.MaxFieldOfViewAngle);
     }
 
-    
-    Vector3 wander()
+
+    protected Vector3 wander()
     {
         float jitter = conf.WanderJitter * Time.deltaTime;
 
@@ -200,5 +200,33 @@ public class Agent : MonoBehaviour
     float RandomBinomial()
     {
         return Random.Range(0f, 1f) - Random.Range(0f, 1f);
+    }
+
+    Vector3 avoidEnemies()
+    {
+        Vector3 r = new Vector3();
+
+        var enemies = world.getPredators(this, conf.Ravoid);
+
+        if (enemies.Count == 0)
+        {
+            return Vector3.zero;
+        }
+
+        foreach (var enemy in enemies)
+        {
+                r += flee(enemy.x);
+        }
+
+        return r.normalized;
+    }
+
+    Vector3 flee(Vector3 target)
+    {
+        //Run the oposite direction from target
+        Vector3 desiredVel = (this.x - target).normalized * conf.maxV;
+
+        //steer velocity
+        return desiredVel - v;
     }
 }

@@ -11,6 +11,7 @@ public class World : MonoBehaviour
     public float bound;
     public float spawnR;
     public bool debugWonder = false;
+    public List<Predator> predators;
 
     void Start ()
 	{
@@ -18,7 +19,8 @@ public class World : MonoBehaviour
 	    spawn(agentPrefab, nAgents);
 
         agents.AddRange(FindObjectsOfType<Agent>());
-	}
+	    predators.AddRange(FindObjectsOfType<Predator>());
+    }
 
 	void Update () {
 		
@@ -51,5 +53,20 @@ public class World : MonoBehaviour
         }
 
         return neightbours;
+    }
+
+    public List<Predator> getPredators(Agent agent, float radious)
+    {
+
+        List<Predator> preds = new List<Predator>();
+        foreach (var predator in predators)
+        {
+            if (Vector3.Distance(agent.x, predator.x) <= radious)
+            {
+                preds.Add(predator);
+            }
+        }
+
+        return preds;
     }
 }
