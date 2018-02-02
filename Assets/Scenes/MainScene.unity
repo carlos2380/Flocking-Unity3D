@@ -194,6 +194,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &84519683
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4793033137882032, guid: a16a59621098d714eb524b612cdb7813, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 121.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793033137882032, guid: a16a59621098d714eb524b612cdb7813, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793033137882032, guid: a16a59621098d714eb524b612cdb7813, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793033137882032, guid: a16a59621098d714eb524b612cdb7813, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793033137882032, guid: a16a59621098d714eb524b612cdb7813, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793033137882032, guid: a16a59621098d714eb524b612cdb7813, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793033137882032, guid: a16a59621098d714eb524b612cdb7813, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793033137882032, guid: a16a59621098d714eb524b612cdb7813, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a16a59621098d714eb524b612cdb7813, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &630028434
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +299,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1185701124
 GameObject:
@@ -289,11 +331,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 4303958842058044, guid: da3c06b1687bb0f4eae7e4774283b3cd,
     type: 2}
-  nAgents: 1
+  nAgents: 400
   agents: []
   bound: 100
   spawnR: 50
-  debugWonder: 1
+  debugWonder: 0
+  predators: []
 --- !u!4 &1185701126
 Transform:
   m_ObjectHideFlags: 0
@@ -305,7 +348,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1185701127
 MonoBehaviour:
@@ -318,16 +361,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cb667f4f3f79d4abfc1f0181a65ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rc: 20
-  Rs: 5
-  Ra: 10
-  Kc: 0
-  Ks: 0
-  Ka: 0
-  Kw: 100
+  Rc: 40
+  Rs: 6
+  Ra: 20
+  Ravoid: 75
+  Kc: 80
+  Ks: 110
+  Ka: 80
+  Kw: 10
+  Kavoid: 1000
   maxA: 20
   maxV: 20
-  MaxFieldOfViewAngle: 90
-  WanderJitter: 51.14
-  WanderRadius: 7.4
+  MaxFieldOfViewAngle: 50
+  WanderJitter: 30
+  WanderRadius: 7.5
   WanderDistance: 11
