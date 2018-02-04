@@ -331,7 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentPrefab: {fileID: 4303958842058044, guid: da3c06b1687bb0f4eae7e4774283b3cd,
     type: 2}
-  nAgents: 400
+  nAgents: 100
   agents: []
   bound: 100
   spawnR: 50
@@ -362,11 +362,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rc: 40
-  Rs: 6
-  Ra: 20
-  Ravoid: 75
+  Rs: 3
+  Ra: 60
+  Ravoid: 40
   Kc: 80
-  Ks: 110
+  Ks: 200
   Ka: 80
   Kw: 10
   Kavoid: 1000
